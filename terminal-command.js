@@ -1,5 +1,4 @@
 const fs = require("fs");
-const filename = "file.txt";
 
 module.exports.ls = () => {
   fs.readdir("./", (err, files) => {
@@ -11,17 +10,14 @@ module.exports.ls = () => {
   });
 };
 
-module.exports.touch = () => {
-  fs.open(filename, "w", (err, fd) => {
-    if (err) throw err;
-    fs.close(fd, err => {
-      if (err) throw err;
-    });
+module.exports.touch = name => {
+  fs.writeFile(name, "", err => {
+    console.log(`${name} file was created`);
   });
 };
 
-module.exports.mkdir = () => {
-  fs.mkdir("/tmp/a/apple", { recursive: true }, err => {
-    if (err) throw err;
+module.exports.mkdir = name => {
+  fs.mkdir(`./${name}`, err => {
+    console.log(`${name} folder was created`);
   });
 };
